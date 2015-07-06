@@ -57,11 +57,25 @@ class RemoteTabsPanel: UITableViewController, HomePanel {
         refreshControl?.addTarget(self, action: "SELrefresh", forControlEvents: UIControlEvents.ValueChanged)
 
         view.backgroundColor = UIConstants.PanelBackgroundColor
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "firefoxAccountChanged:", name: FirefoxAccountChangedNotification, object: nil)
     }
+
+
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         refresh()
+    }
+
+    func firefoxAccountChanged(notification: NSNotification) {
+        if notification.name == FirefoxAccountChangedNotification {
+            refresh()
+        }
     }
 
     var tableViewDelegate: RemoteTabsPanelDataSource? {

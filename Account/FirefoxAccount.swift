@@ -12,6 +12,9 @@ private let log = XCGLogger.defaultInstance()
 // The version of the account schema we persist.
 let AccountSchemaVersion = 1
 
+// add a property to allow the observation of firefox accounts
+public let FirefoxAccountChangedNotification = "FirefoxAccountChangedNotification"
+
 /// A FirefoxAccount mediates access to identity attached services.
 ///
 /// All data maintained as part of the account or its state should be
